@@ -25,13 +25,7 @@
 //     }
 // }
 
-const readline = require('readline');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-
-})
 
 const createDeck = () => {
     let d = Array.from({length: 52}, (_, i) => i)
@@ -65,16 +59,9 @@ const getCard = (index) => {
 const shuffle = (d) => {
     for (let i = d.length - 1; i > 0; i--) {
         let j = Math.floor((Math.random() * (i + 1)))
-        // console.log(`The value of j is ${j}`)
-        // console.log(`The value of d[i] is ${d[i]} and the value of d[j] is ${d[j]}`)
         let temp = d[i]
-        // console.log(`The temp variable is ${temp} and is also ${d[i]}`)
         d[i] = d[j]
-        // console.log(`The value of d[i] is now equal to ${d[i]}`)
-        // console.log('deck:', d)
         d[j] = temp
-        // console.log(`The value of d[j] is now equal to ${d[j]}`)
-        // console.log('deck:', d)
     }
     return d
 }
@@ -110,21 +97,25 @@ const runGame = () => {
     const shuffledDeck = shuffle(deck);
     const firstHand = deal(shuffledDeck);
     const secondHand = deal(shuffledDeck);
-    // console.log(firstHand, secondHand);
     console.log(`Player One has a ${firstHand.face} of ${firstHand.suit}`)
     console.log(`Player Two has a ${secondHand.face} of ${secondHand.suit}`)
     const winner = decideGame(firstHand, secondHand);
     console.log(`${winner} has the high card and wins the game`) 
 
-    // rl.question("You've drawn a hand. Do you wish to continue? ", askPlayer )
+    
 }
 
 runGame()
 
 
-// let newDeck = Array.from({length: 10}, (_, i) => i)
-// console.log(newDeck)
-// console.log(shuffle(newDeck))
+// const readline = require('readline');
+
+// const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+
+// })
+// rl.question("You've drawn a hand. Do you wish to continue? ", askPlayer )
 
 
 
