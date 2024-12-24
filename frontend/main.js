@@ -35,25 +35,16 @@ const createDeck = () => {
     return d
 }
 
-function getSuit(card) {
-    const suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
-    let suit = Math.floor(card / 13);
-    return suits[suit]
-}
-
-function getFace(card) {
-    const faces = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King']
-    let face = card % 13
-    return faces[face]
-}
-
 const getCard = (index) => {
-    let suit = getSuit(index);
-    let face = getFace(index);
-    let card = {suit, face};
+    const suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+    const faces = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King']
+    const ranks = Array.from({length: 13}, (_, i) => i)
+    let suit = suits[Math.floor(index / 13)]
+    let face = faces[index % 13]
+    let rank = ranks[index % 13]
+    let card = {suit, face, rank};
     return card
 }
-
 
 
 const shuffle = (d) => {
@@ -71,41 +62,50 @@ const deal = (shuffled) => {
     let dealt = shuffled.shift()
     let hand = getCard(dealt)
     return hand
-
-
 }
 
 const decideGame = (first, second) =>  {
+    if (typeof first.face === 'string' || typeof second.face === 'string'){
+        return first.rank > second.rank ? 'Player One' : 'Player Two'
+    }
     return first.face > second.face ? 'Player One' : 'Player Two'
 }
 
-const askPlayer = (input) => {
-    if (input != 'Yes' || input != 'No') {
-        console.log('Please answer yes or no to continue')
-        askPlayer()
-        
-    } else {
-        rl.close();
-    }
-    
-}
 
 
 const runGame = () => {
     const deck = createDeck();
-
     const shuffledDeck = shuffle(deck);
     const firstHand = deal(shuffledDeck);
     const secondHand = deal(shuffledDeck);
+
+
     console.log(`Player One has a ${firstHand.face} of ${firstHand.suit}`)
     console.log(`Player Two has a ${secondHand.face} of ${secondHand.suit}`)
-    const winner = decideGame(firstHand, secondHand);
+
+    const winner = decideGame(firstHand, secondHand)
     console.log(`${winner} has the high card and wins the game`) 
 
     
 }
 
+
 runGame()
+
+
+
+
+// const askPlayer = (input) => {
+//     if (input != 'Yes' || input != 'No') {
+//         console.log('Please answer yes or no to continue')
+//         askPlayer()
+        
+//     } else {
+//         rl.close();
+//     }
+    
+// }
+
 
 
 // const readline = require('readline');
