@@ -90,7 +90,45 @@ const runGame = () => {
 }
 
 
-runGame()
+// runGame()
+
+
+const deck = createDeck();
+const shuffledDeck = shuffle(deck);
+const hand = []
+for (let i = 0; i <= 5; i++) {
+    hand.push(getCard(shuffledDeck.shift()))
+}
+
+
+const findKind = (h) => {
+    console.log(h)
+    let pairs = []
+    for (let i = 0; i <= h.length - 1; i++) {
+        let currentCard = h[i]
+       for (let j = 1; j <= h.length - 1; j++) {
+        let card = h[j]
+        if (currentCard.face === card.face && currentCard.suit != card.suit) {
+            console.log(currentCard, card)
+            pairs.push(currentCard)
+            pairs.push(card)
+        }
+       }
+    }
+    return pairs   
+}
+
+console.log(findKind(hand))
+
+// findKind([{ suit: 'Hearts', face: 3, rank: 2 },
+//     { suit: 'Clubs', face: 'King', rank: 12 },
+//     { suit: 'Diamonds', face: 'Ace', rank: 0 },
+//     { suit: 'Hearts', face: 9, rank: 8 },
+//     { suit: 'Clubs', face: 3, rank: 2 },
+//     { suit: 'Clubs', face: 7, rank: 6 }]
+//   )
+
+
 
 
 
