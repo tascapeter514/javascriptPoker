@@ -103,22 +103,27 @@ for (let i = 0; i <= 5; i++) {
 
 const findKind = (h) => {
     console.log(h)
-    let pairs = []
-    for (let i = 0; i <= h.length - 1; i++) {
-        let currentCard = h[i]
-       for (let j = 1; j <= h.length - 1; j++) {
-        let card = h[j]
-        if (currentCard.face === card.face && currentCard.suit != card.suit) {
-            console.log(currentCard, card)
-            pairs.push(currentCard)
-            pairs.push(card)
+    let hash = {};
+    let pairs = [];
+    for (let hand of h) {
+        if (hash[hand.face]) {
+            hash[hand.face] += 1;
+        } else {
+            hash[hand.face] = 1;
         }
-       }
     }
-    return pairs   
+    console.log(hash)
+    for (let hand of h) {
+        if (hash[hand] > 1) {
+            pairs.push(hand)
+        }
+    }
+    console.log(pairs)
 }
 
-console.log(findKind(hand))
+// console.log(findKind(hand))
+
+findKind(hand)
 
 // findKind([{ suit: 'Hearts', face: 3, rank: 2 },
 //     { suit: 'Clubs', face: 'King', rank: 12 },
