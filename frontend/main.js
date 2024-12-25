@@ -114,10 +114,11 @@ const findKind = (h) => {
     }
     console.log(hash)
     for (let hand of h) {
-        if (hash[hand] > 1) {
+        if (hash[hand.face] > 1) {
             pairs.push(hand)
         }
     }
+    
     console.log(pairs)
 }
 
