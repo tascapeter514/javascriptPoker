@@ -145,7 +145,37 @@ const findSuits = (h) => {
 }
 
 
-console.log(findSuits(hand))
+// console.log(findSuits(hand))
+
+
+const findStraight = (h) => {
+    console.log(h);
+    sort = h.sort((a, b) => a.rank - b.rank)
+    console.log(sort)
+
+    for (let i = 0; i < sort.length - 1; i++) {
+        let diff = sort[i + 1].rank - sort[i].rank
+        if (diff === 1) {
+            console.log('Increment by 1')
+            console.log(sort[i].face, sort[i + 1].face)
+        } else {
+            return 'Hand is not a straight.'
+        }
+    }
+    return 'Hand is a bona fide straight!'
+
+}
+
+const straight = [{ suit: 'Hearts', face: 'King', rank: 12 },
+{ suit: 'Spades', face: 'Jack', rank: 10 },
+{ suit: 'Diamonds', face: 10, rank: 9 },
+{ suit: 'Clubs', face: 9, rank: 8 },
+{ suit: 'Diamonds', face: 'Queen', rank: 11 }]
+
+
+console.log(findStraight(straight))
+
+
 
 
 
