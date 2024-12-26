@@ -21,6 +21,17 @@
 // })
 // rl.question("You've drawn a hand. Do you wish to continue? ", askPlayer )
 
+const straight = [{ suit: 'Hearts', face: 'King', rank: 12 },
+    { suit: 'Spades', face: 'Jack', rank: 10 },
+    { suit: 'Diamonds', face: 10, rank: 9 },
+    { suit: 'Clubs', face: 9, rank: 8 },
+    { suit: 'Diamonds', face: 'Queen', rank: 11 }]
+
+const flush = [{ suit: 'Hearts', face: 'King', rank: 12 },
+    { suit: 'Hearts', face: 'Jack', rank: 10 },
+    { suit: 'Hearts', face: 10, rank: 9 },
+    { suit: 'Hearts', face: 9, rank: 8 },
+    { suit: 'Hearts', face: 'Queen', rank: 11 }]
 
 
 const createDeck = () => {
@@ -135,13 +146,14 @@ const findSuits = (h) => {
         }
     })
     console.log('hash:', hash)
+    return hash
 
-    h.forEach(hand => {
-        if (hash[hand.suit] > 1) {
-            suits.push(hand)
-        }
-    })
-    return suits
+    // h.forEach(hand => {
+    //     if (hash[hand.suit] > 1) {
+    //         suits.push(hand)
+    //     }
+    // })
+    // return suits
 }
 
 
@@ -166,14 +178,17 @@ const findStraight = (h) => {
 
 }
 
-const straight = [{ suit: 'Hearts', face: 'King', rank: 12 },
-{ suit: 'Spades', face: 'Jack', rank: 10 },
-{ suit: 'Diamonds', face: 10, rank: 9 },
-{ suit: 'Clubs', face: 9, rank: 8 },
-{ suit: 'Diamonds', face: 'Queen', rank: 11 }]
+// console.log(findStraight(straight))
+
+const findFlush = (h) => {
+    let suits = findSuits(h)
+    console.log(Object.keys(suits))
+    return Object.keys(suits).length == 1 ? "True" : "False"
+}
+
+console.log(findFlush(flush))
 
 
-console.log(findStraight(straight))
 
 
 
