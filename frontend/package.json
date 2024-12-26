@@ -1,0 +1,22 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tascapeter514/javascriptPoker.git"
+  },
+  "author": "Peter Tasca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tascapeter514/javascriptPoker/issues"
+  },
+  "homepage": "https://github.com/tascapeter514/javascriptPoker#readme",
+  "description": ""
+}

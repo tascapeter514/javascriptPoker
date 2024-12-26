@@ -1,29 +1,25 @@
 
-
-// class Card {
-//     constructor(suit, face) {
-//         this.face = face;
-//         this.suit = suit;
+// const askPlayer = (input) => {
+//     if (input != 'Yes' || input != 'No') {
+//         console.log('Please answer yes or no to continue')
+//         askPlayer()
+        
+//     } else {
+//         rl.close();
 //     }
+    
 // }
 
-// class Deck {
-//     constructor() {
-//         this.deck = []
-//     }
 
-//     makeDeck() {
-//         for (let suit of suits) {
-//             for (let face of faces) {
-//                 let card = new Card(suit, face)
-//                 // console.log("card:", card)
-//                 this.deck.push(card)
-//             }
 
-//         }
-//         return this.deck
-//     }
-// }
+// const readline = require('readline');
+
+// const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+
+// })
+// rl.question("You've drawn a hand. Do you wish to continue? ", askPlayer )
 
 
 
@@ -102,7 +98,6 @@ for (let i = 0; i <= 5; i++) {
 
 
 const findKind = (h) => {
-    console.log(h)
     let hash = {};
     let pairs = [];
     for (let hand of h) {
@@ -119,47 +114,45 @@ const findKind = (h) => {
         }
     }
     
-    console.log(pairs)
+    return pairs
 }
 
-// console.log(findKind(hand))
 
-findKind(hand)
-
-// findKind([{ suit: 'Hearts', face: 3, rank: 2 },
-//     { suit: 'Clubs', face: 'King', rank: 12 },
-//     { suit: 'Diamonds', face: 'Ace', rank: 0 },
-//     { suit: 'Hearts', face: 9, rank: 8 },
-//     { suit: 'Clubs', face: 3, rank: 2 },
-//     { suit: 'Clubs', face: 7, rank: 6 }]
-//   )
+// findKind(hand)
+// module.exports.findKind = findKind
 
 
+const findSuits = (h) => {
+    console.log(h)
+    let hash = {};
+    let suits = [];
+
+    h.forEach(hand => {
+        if (hash[hand.suit]) {
+            hash[hand.suit] += 1;
+        } else {
+            hash[hand.suit] = 1
+        }
+    })
+    console.log('hash:', hash)
+
+    h.forEach(hand => {
+        if (hash[hand.suit] > 1) {
+            suits.push(hand)
+        }
+    })
+    return suits
+}
+
+
+console.log(findSuits(hand))
 
 
 
 
-// const askPlayer = (input) => {
-//     if (input != 'Yes' || input != 'No') {
-//         console.log('Please answer yes or no to continue')
-//         askPlayer()
-        
-//     } else {
-//         rl.close();
-//     }
-    
-// }
 
 
 
-// const readline = require('readline');
-
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-
-// })
-// rl.question("You've drawn a hand. Do you wish to continue? ", askPlayer )
 
 
 
