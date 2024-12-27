@@ -195,36 +195,35 @@ const isStraight = (h) => {
             console.log('Increment by 1')
             console.log(sort[i].face, sort[i + 1].face)
         } else {
-            return False
+            return false
         }
     }
-    return True
+    return true
 
 }
 
 // console.log(findStraight(straight))
 
-const isFlush = (h) => {
-    let suits = findSuits(h)
-    console.log(Object.keys(suits))
-    return Object.keys(suits).length == 1 ? "True" : "False"
+const isFlush = (hash) => {
+    console.log(Object.keys(hash))
+    return Object.keys(hash).length == 1 ? true : false
 }
 
-const isFullHouse = (h) => {
-    console.log('hash:', findPairs(h))
-    let result = Object.values(findPairs(h))
+const isFullHouse = (hash) => {
+    // console.log('hash:', findPairs(h))
+    // let result = Object.values(findPairs(h))
     // must distinguish from three of a kind
 
-    let fullHouse = result.filter(r => r === 3 && r === 2)
+    let fullHouse = Object.values(hash).filter(r => r === 3 && r === 2)
     return fullHouse.length > 1 ? true : false
 }
 
-const kindOfPair = (h) =>  {
-    let hash = findPairs(h);
+const kindOfPair = (hash) =>  {
+    console.log("hash values:", hash, Object.values(hash))
     let isTwoPair = Object.values(hash).filter(v => v === 2)
     let isThreePair = Object.values(hash).filter(v => v === 3)
     let isFourPair = Object.values(hash).filter(v => v === 4)
-    // console.log('two pair:', isTwoPair)
+    console.log('two pair:', isTwoPair)
     // console.log('three pair:', isThreePair)
     // console.log('three pair length:', isThreePair.length)
     // console.log('four pair:', isFourPair)
@@ -235,7 +234,7 @@ const kindOfPair = (h) =>  {
         return "Four of a Kind"
     } else if (isTwoPair.length > 1) {
         return 'Two Pair'
-    } else if (isThreePair.length > 0 && !isFullHouse(h)) {
+    } else if (isThreePair.length > 0 && !isFullHouse(hash)) {
         return 'Three of a Kind'
     } else {
         return 'One Pair'
@@ -248,9 +247,23 @@ const pokerHands = ['High Card', 'One Pair', 'Two Pair',
 // isFullHouse(fullHouse)
 
 
-console.log(kindOfPair(twoPair))
-console.log(kindOfPair(threePair))
-console.log(kindOfPair(fourPair))
+// console.log(kindOfPair(twoPair))
+// console.log(kindOfPair(threePair))
+// console.log(kindOfPair(fourPair))
+
+const getHand = (h) => {
+    let pairs = findPairs(h);
+    console.log('pairs:', pairs)
+    // let suits = findSuits(h);
+    let pair = pairs.length > 4 ? false : true;
+    // let flush = isFlush(suits);
+
+    if (pair) {
+        return kindOfPair(pairs)
+    }
+}
+
+console.log(getHand(threePair))
 
 
 
