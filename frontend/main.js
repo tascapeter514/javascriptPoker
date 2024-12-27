@@ -57,6 +57,12 @@ const fourPair = [{ suit: 'Hearts', face: 2, rank: 0 },
     { suit: 'Clubs', face: 5, rank: 3 },
     { suit: 'Diamonds', face: 2, rank: 0 }]
 
+const royalFlush = [{ suit: 'Hearts', face: 'King', rank: 12 },
+    { suit: 'Hearts', face: 'Jack', rank: 10 },
+    { suit: 'Hearts', face: 10, rank: 9 },
+    { suit: 'Hearts', face: 'Ace', rank: 13 },
+    { suit: 'Hearts', face: 'Queen', rank: 11 }]
+
 
 
 
@@ -78,6 +84,10 @@ const getCard = (index) => {
     let card = {suit, face, rank};
     return card
 }
+
+
+
+
 
 
 const shuffle = (d) => {
@@ -185,21 +195,18 @@ const findSuits = (h) => {
 
 
 const isStraight = (h) => {
-    console.log(h);
-    sort = h.sort((a, b) => a.rank - b.rank)
+    console.log("straight hash:", h);
+    let values = Object.values(h)
+    sort = values.sort((a, b) => a.rank - b.rank)
     console.log(sort)
 
     for (let i = 0; i < sort.length - 1; i++) {
         let diff = sort[i + 1].rank - sort[i].rank
-        if (diff === 1) {
-            console.log('Increment by 1')
-            console.log(sort[i].face, sort[i + 1].face)
-        } else {
+        if (diff != 1) {
             return false
-        }
-    }
+        } 
     return true
-
+    }
 }
 
 // console.log(findStraight(straight))
@@ -251,38 +258,58 @@ const pokerHands = ['High Card', 'One Pair', 'Two Pair',
 // console.log(kindOfPair(threePair))
 // console.log(kindOfPair(fourPair))
 
-const getHand = (h) => {
-    let pairs = findPairs(h);
-    console.log('pairs:', pairs)
-    // let suits = findSuits(h);
-    let pair = pairs.length > 4 ? false : true;
-    // let flush = isFlush(suits);
+const isRoyalFlush = (h) => {
+    console.log('royal check')
+    let suits = findSuits(h);
+    let pairs = findPairs(h)
+    let flush = isFlush(suits)
+    let straight = isStraight(h)
+    if (flush && straight) {
+        console.log('royal hand:', h)
+        return h.every(card => card.rank > 8)
+    }
+    
+}
 
-    if (pair) {
-        return kindOfPair(pairs)
+// isRoyalFlush(straight)
+// isRoyalFlush(royalFlush)
+
+// console.log(isRoyalFlush(royalFlush))
+
+
+const isStraightOrFlush = (h, s, p) => {
+     if (isFlush(s) && isStraight(p)) {
+        isRoyalFlush(h) ? 'Royal Flush' : 'Straight Flush'
+    } else if (isFlush(suits) || isStraight(pairs)) {
+        return isFlush(suits) ? 'Flush' : 'Straight'
+    } else {
+        return false
     }
 }
 
-console.log(getHand(threePair))
+const getHand = (h) => {
+    let pairs = findPairs(h);
+    console.log('pairs:', pairs)
+    let suits = findSuits(h);
+    let isPair = pairs.length > 4 ? false : true;
+    // let flush = isFlush(suits);
 
 
+    if (isPair) {
+        let pairKind = kindOfPair(pairs);
+        
 
+    } else {
+        if (!isFlush(suits) && !isStraight(pairs)) {
+            return 'High Card'
+        } else {
+            let result = isStraightOrFlush(h, suits, pairs)
+            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+       
+    }
+}
 
 
 
