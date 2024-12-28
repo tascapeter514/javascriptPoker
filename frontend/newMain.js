@@ -6,13 +6,13 @@ const createCard = (i) => {
 }
 
 const displayCard = (c) => {
-    console.log('card:', c)
+    // console.log('card:', c)
     let split = c.split('')
-    console.log(split.length)
+    // console.log(split.length)
     const suitHash = {'S': '♤', 'H': '♡', 'D': '♦', 'C': '♧'}
 
     let [face, suit] = split.length > 2 ? [split[0] + split[1], split[2]] : split
-    console.log(face, suit)
+    // console.log(face, suit)
     let temp = suitHash[suit];
     return face + temp
 }
@@ -29,14 +29,32 @@ const displayHand = (hand) => {
     return hand.map(h => displayCard(h))
 }
 
-console.log(displayHand(createHand(0, 12)))
-// console.log(displayCard(createCard(9)))
 
+const makeDeck = () => {
+    const values = Array.from(new Array(51), (_, index) => index) 
+    const deck = values.map(val => createCard(val))
+    let count = deck.length + 1;
+    while ((count -= 1)) {
+        deck.push(deck.splice(Math.floor(Math.random() * count), 1)[0]);
+    }
+    return deck
+    
+}
 
+let deck = makeDeck()
 
+const deal = (d) => {
+    const playerArray = [];
+    const opponentArray = [];
+    for (let i = 5; i >= 1; i--) {
+        playerArray.push(d.shift());
+        opponentArray.push(d.shift())
+    }
+    const playerHand = displayHand(playerArray).join(' ');
+    const opponentHand = displayHand(opponentArray).join(' ');
+    console.log(playerHand);
+    console.log(opponentHand)
+}
 
+deal(deck)
 
-
-
-
-// console.log(displayCard(createCard(12)))
